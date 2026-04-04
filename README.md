@@ -1,34 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+HW 2: Robo-Advisor
+截止時間： 04月10日 下午 11:59 分數 100 繳交方式 檔案上傳 接受繳交時間 直到 04月10日 下午 11:59
+Goal
+The objective of this assignment is to develop a web-based platform that monitors and visualizes selected financial indicators to assist investment and trading decisions.
 
-## Getting Started
+In particular, you are required to focus on indicators related to DAT.co (Digital Asset Treasury companies).
+These indicators are commonly used in crypto markets to evaluate the valuation and behavior of companies holding Bitcoin or other digital assets.
 
-First, run the development server:
+By building this system, you will gain experience in:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Financial data collection
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Indicator analysis
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Web-based visualization
 
-## Learn More
+(Optional) AI-assisted insights
 
-To learn more about Next.js, take a look at the following resources:
+Task Description
+You are required to design and implement a website that allows users to observe the time-series behavior of a chosen DAT.co-related indicator.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Requirements
+Select an Indicator
+Choose one indicator related to DAT.co.
+Examples include (but are not limited to):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+mNAV (Modified Net Asset Value)
 
-## Deploy on Vercel
+Premium to NAV
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Discount to NAV
+Data Collection
+Identify and obtain the data source for your chosen indicator.
+Possible approaches include:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Using public APIs
+
+Web scraping from financial or crypto-related websites
+
+Aggregating data from multiple sources
+
+Data Visualization
+Build a user interface (UI) that allows users to:
+
+Observe the indicator over time (daily frequency)
+
+AI-Generated Summary (Optional Bonus)
+Integrate any LLM API (e.g., OpenAI API, Gemini API, Claude API) to:
+
+Automatically generate summaries or insights based on the indicator data
+
+Provide interpretation or trend analysis
+
+Deployment
+Deploy your website to a publicly accessible domain (you can consider using Vercel, GCP, AWS, etc.).
+
+Report Writing
+Submit a report describing your work.
+
+Report Requirements
+Your report should include the following:
+
+Selected Indicator
+
+What indicator did you choose?
+
+Why did you choose it?
+
+Relationship with Bitcoin (BTC)
+
+Explain how your indicator is related to BTC
+
+Provide insights or hypotheses about how it affects or reflects BTC price behavior
+
+Deployed Website URL
+
+Provide the link to your live website
+
+Grading Policy
+Component	Weight
+Correct Data Collection	40%
+Website Visualization	40%
+Report	20%
+Bonus: AI Summary (Optional)	+10%
