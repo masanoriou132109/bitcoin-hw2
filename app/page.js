@@ -62,10 +62,19 @@ export default function Home() {
       if (json.success) {
         setAiSummary(json.summary);
       } else {
-        setAiError(json.error || "Failed to generate AI insights");
+        const errText = json.error || "Failed to generate AI insights";
+        if (errText.includes('503') || errText.includes('high demand') || errText.includes('UNAVAILABLE')) {
+          setAiError("⚠️ Google AI 模型伺服器目前處於高負載狀態，請稍等幾分鐘後再試一次。");
+        } else {
+          setAiError(errText);
+        }
       }
     } catch (err) {
-      setAiError(err.message);
+      if (err.message.includes('503') || err.message.includes('high demand') || err.message.includes('UNAVAILABLE')) {
+        setAiError("⚠️ Google AI 模型伺服器目前處於高負載狀態，請稍等幾分鐘後再試一次。");
+      } else {
+        setAiError(err.message);
+      }
     } finally {
       setIsAiLoading(false);
     }
