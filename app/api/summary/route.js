@@ -7,11 +7,17 @@ export async function POST(request) {
     
     // We require the user to provide their API key from the frontend for testing to avoid hardcoding
     // Alternatively, it can be driven via process.env.GEMINI_API_KEY if configured in Vercel
+    let apiKey = process.env.GEMINI_API_KEY;
     const authHeader = request.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return NextResponse.json({ success: false, error: 'No API Key provided' }, { status: 401 });
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const headerKey = authHeader.replace('Bearer ', '').trim();
+      if (headerKey) apiKey = headerKey;
     }
-    const apiKey = authHeader.replace('Bearer ', '');
+
+    if (!apiKey) {
+      return NextResponse.json({ success: false, error: 'Server is missing GEMINI_API_KEY and No API Key provided from frontend' }, { status: 401 });
+    }
 
     const ai = new GoogleGenAI({ apiKey });
 

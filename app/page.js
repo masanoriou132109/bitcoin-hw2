@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, ReferenceLine } from "recharts";
 import { Activity, TrendingUp, TrendingDown, Cpu, Key, CheckCircle, AlertCircle } from "lucide-react";
 
 export default function Home() {
@@ -22,6 +22,10 @@ export default function Home() {
   const premiumChange = latestPremium - prevPremium;
   const latestMSTR = data.length > 0 ? data[data.length - 1].mstrPrice : 0;
   const latestBTC = data.length > 0 ? data[data.length - 1].btcPrice : 0;
+  
+  const averagePremium = data.length > 0 
+    ? data.reduce((sum, item) => sum + item.premium, 0) / data.length 
+    : 0;
 
   useEffect(() => {
     fetchIndicatorData();
@@ -203,6 +207,12 @@ export default function Home() {
                   domain={['auto', 'auto']}
                 />
                 <Tooltip content={<CustomTooltip />} />
+                <ReferenceLine 
+                  y={averagePremium} 
+                  stroke="var(--text-secondary)" 
+                  strokeDasharray="5 5"
+                  label={{ position: 'insideTopLeft', value: `60-Day Avg: ${averagePremium.toFixed(2)}%`, fill: 'var(--text-secondary)', fontSize: 12 }} 
+                />
                 <Area 
                   type="monotone" 
                   dataKey="premium" 
