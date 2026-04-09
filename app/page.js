@@ -11,7 +11,6 @@ export default function Home() {
   const [periodStr, setPeriodStr] = useState("Last 60 Days");
   
   // AI related states
-  const [apiKey, setApiKey] = useState("");
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [aiSummary, setAiSummary] = useState("");
   const [aiError, setAiError] = useState("");
@@ -49,19 +48,13 @@ export default function Home() {
   };
 
   const generateAIInsights = async () => {
-    if (!apiKey) {
-      setAiError("Please provide a Gemini API Key first.");
-      return;
-    }
-    
     try {
       setIsAiLoading(true);
       setAiError("");
       const res = await fetch("/api/summary", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ data })
       });
@@ -112,21 +105,6 @@ export default function Home() {
           </p>
         </div>
       </header>
-
-      {/* API Key Modal / Banner */}
-      <section className="glass-panel p-6 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between animate-fade-in" style={{ animationDelay: '0.2s' }}>
-        <div className="flex items-center gap-3 w-full">
-          <Key size={20} className="text-gray-400" />
-          <input 
-            type="password" 
-            placeholder="Enter Gemini API Key for AI Summaries" 
-            className="bg-transparent border-b border-gray-600 outline-none px-2 py-1 flex-1 focus:border-[var(--accent)] transition-colors text-sm"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-          />
-        </div>
-        {apiKey && <CheckCircle size={20} className="text-green-500 shrink-0" />}
-      </section>
 
       {/* Main KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
