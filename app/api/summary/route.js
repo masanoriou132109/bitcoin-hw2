@@ -32,10 +32,20 @@ ${dataStr}
 
 Please provide a short, professional, and insightful summary (max 3-4 sentences) analyzing the recent trend of the premium. Mention if it's expanding or contracting, and what that might imply about market sentiment towards Bitcoin and MSTR.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
+    let response;
+    try {
+      response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+      });
+    } catch (primaryErr) {
+      console.warn('Primary model failed, retrying after 2 seconds...', primaryErr.message);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
+      });
+    }
 
     return NextResponse.json({ success: true, summary: response.text });
   } catch (error) {

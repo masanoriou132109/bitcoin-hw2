@@ -203,6 +203,7 @@ export default function Home() {
                 <Area 
                   type="monotone" 
                   dataKey="premium" 
+                  baseValue="dataMin"
                   stroke="var(--accent)" 
                   strokeWidth={3}
                   fillOpacity={1} 
