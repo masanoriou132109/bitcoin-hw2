@@ -7,7 +7,7 @@ export async function GET(request) {
 
     const mstrQuote = await yahooFinance.quote('MSTR');
     const sharesOutstanding = mstrQuote.sharesOutstanding || 325954147;
-    const btcHoldings = 386000;
+    const btcHoldings = 766970;
 
     const date = new Date();
     date.setDate(date.getDate() - 60);
