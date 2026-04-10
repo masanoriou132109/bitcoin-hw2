@@ -35,14 +35,14 @@ Please provide a short, professional, and insightful summary (max 3-4 sentences)
     let response;
     try {
       response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemma-4-31b-it',
         contents: prompt,
       });
     } catch (primaryErr) {
       console.warn('Primary model failed, retrying after 2 seconds...', primaryErr.message);
       await new Promise(resolve => setTimeout(resolve, 2000));
       response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemma-4-31b-it',
         contents: prompt,
       });
     }

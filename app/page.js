@@ -65,6 +65,8 @@ export default function Home() {
         const errText = json.error || "Failed to generate AI insights";
         if (errText.includes('503') || errText.includes('high demand') || errText.includes('UNAVAILABLE')) {
           setAiError("⚠️ Google AI 模型伺服器目前處於高負載狀態，請稍等幾分鐘後再試一次。");
+        } else if (errText.includes('429') || errText.includes('quota') || errText.includes('RESOURCE_EXHAUSTED')) {
+          setAiError("⏳ API 請求太頻繁，已達到免費版每分鐘 20 次的限制。請稍等約一分鐘後再試。");
         } else {
           setAiError(errText);
         }
@@ -72,6 +74,8 @@ export default function Home() {
     } catch (err) {
       if (err.message.includes('503') || err.message.includes('high demand') || err.message.includes('UNAVAILABLE')) {
         setAiError("⚠️ Google AI 模型伺服器目前處於高負載狀態，請稍等幾分鐘後再試一次。");
+      } else if (err.message.includes('429') || err.message.includes('quota') || err.message.includes('RESOURCE_EXHAUSTED')) {
+        setAiError("⏳ API 請求太頻繁，已達到免費版每分鐘 20 次的限制。請稍等約一分鐘後再試。");
       } else {
         setAiError(err.message);
       }
